@@ -1,3 +1,7 @@
+# CodeReclaimers LLC, Colbert GA 30628
+# Copyright (c) 2016
+# Distributed under the MIT license.
+
 import socket
 import subprocess
 
@@ -8,18 +12,28 @@ class FailedCommand(Exception):
     pass
 
 
-class GoTextBase:
+class GoTextBase(object):
     def _send(self, data):
         raise NotImplementedError()
 
     def close(self):
         raise NotImplementedError()
 
-    def genmove(self, color):
-        return self._send('genmove {0}'.format(color)).strip()
+    # GNU Go commands
+    def boardsize(self, size):
+        return self._send('boardsize {0}'.format(size)).strip()
+
+    def clear_board(self):
+        return self._send('clear_board').strip()
 
     def estimate_score(self):
         return self._send('estimate_score').strip()
+
+    def genmove(self, color):
+        return self._send('genmove {0}'.format(color)).strip()
+
+    def play(self, color, position):
+        return self._send('play {0} {1}'.format(color, position)).strip()
 
     def showboard(self):
         return self._send('showboard')

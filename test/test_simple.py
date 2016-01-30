@@ -1,3 +1,7 @@
+# CodeReclaimers LLC, Colbert GA 30628
+# Copyright (c) 2016
+# Distributed under the MIT license.
+
 import time
 import subprocess
 from gtp import GoTextPipe, GoTextNetwork
@@ -9,6 +13,14 @@ def check(go):
         print(repr(go.genmove('white')))
         print(repr(go.estimate_score()))
         print(go.showboard())
+
+    print(repr(go.boardsize(5)))
+    print(repr(go.clear_board()))
+    print(go.showboard())
+    print(repr(go.play('black', 'A5')))
+    print(repr(go.play('white', 'A4')))
+    print(repr(go.estimate_score()))
+    print(go.showboard())
 
     go.close()
 
